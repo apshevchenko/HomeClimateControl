@@ -1,0 +1,12 @@
+.temperature-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 100%;
+    color: white;
+    font-size: 5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: background-color 0.5s ease;
+}
