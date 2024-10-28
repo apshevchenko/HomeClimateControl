@@ -5,7 +5,7 @@ const TemperatureDisplay = () => {
     const [temperature, setTemperature] = useState(null);
 
     useEffect(() => {
-        const socket = new WebSocket("ws://localhost:8080");
+        const socket = new WebSocket("wss://homeclimatecontrol-production.up.railway.app/");
 
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
