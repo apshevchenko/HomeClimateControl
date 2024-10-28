@@ -7,12 +7,25 @@ const TemperatureDisplay = () => {
     useEffect(() => {
         const socket = new WebSocket("wss://homeclimatecontrol-production.up.railway.app/");
 
+        socket.onopen = () => {
+            console.log("WebSocket connection established.");
+        };
+
         socket.onmessage = (event) => {
             const data = JSON.parse(event.data);
             if (data.temperature !== undefined) {
                 setTemperature(data.temperature);
             }
         };
+
+        socket.onerror = (error) => {
+            console.error("WebSocket error:", error);
+        };
+
+        socket.onclose = (event) => {
+            console.log(`WebSocket connection closed: ${event.reason}`);
+        };
+
 
         return () => {
             socket.close();
