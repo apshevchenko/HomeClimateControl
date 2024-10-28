@@ -8,8 +8,7 @@
     "client": "npm start --prefix client",
     "server": "node server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "build": "npm run build --prefix client",
-    "postinstall": "npm run build --prefix client"
+    "build": "npm run build --prefix client"
   },
   "dependencies": {
     "express": "^4.21.1",

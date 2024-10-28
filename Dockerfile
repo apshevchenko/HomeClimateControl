@@ -1,5 +1,5 @@
 # Указываем базовый образ Node.js
-FROM node:18-alpine
+FROM node:18
 
 # Устанавливаем рабочую директорию
 WORKDIR /app
@@ -12,6 +12,9 @@ RUN npm install
 
 # Копируем все файлы в контейнер
 COPY . .
+
+# Устанавливаем зависимости для директории `client`
+RUN npm install --prefix client
 
 # Собираем клиентское приложение React
 RUN npm run build --prefix client
