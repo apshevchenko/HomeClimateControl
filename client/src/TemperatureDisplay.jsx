@@ -32,11 +32,23 @@ const TemperatureDisplay = () => {
         };
     }, []);
 
+    // Функция для вычисления цвета на основе температуры
     const getBackgroundColor = (temp) => {
-        const normalizedTemp = Math.min(Math.max((temp + 10) / 40, 0), 1);
-        const red = Math.floor(255 * normalizedTemp);
-        const blue = Math.floor(255 * (1 - normalizedTemp));
-        return `rgb(${red}, 0, ${blue})`;
+        const maxTemp = 39;
+        const minTemp = 0;
+
+        // Ограничиваем температуру в пределах от 0 до 39
+        const clampedTemp = Math.max(minTemp, Math.min(temp, maxTemp));
+
+        // Вычисляем процентное значение температуры от minTemp до maxTemp
+        const percentage = (clampedTemp - minTemp) / (maxTemp - minTemp);
+
+        // Интерполяция цветов от темно-синего к темно-красному
+        const red = Math.round(percentage * 255);
+        const green = 0;
+        const blue = Math.round((1 - percentage) * 255);
+
+        return `rgb(${red}, ${green}, ${blue})`;
     };
 
     return (
