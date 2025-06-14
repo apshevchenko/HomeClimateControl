@@ -16,6 +16,11 @@ app.use(express.json());
 wss.on("connection", (ws) => {
     console.log("Client connected via WebSocket");
 
+    // Send the last known temperature immediately after connection
+    if (currentTemperature !== null && ws.readyState === WebSocket.OPEN) {
+        ws.send(JSON.stringify({ temperature: currentTemperature }));
+    }
+
     ws.on("message", (message) => {
         try {
             const temperatureData = JSON.parse(message.toString('utf-8'));
